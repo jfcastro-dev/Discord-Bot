@@ -63,7 +63,7 @@ func TestParseCommand(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			output := ParseMessage(tc.input)
 			if output != tc.expected {
-				t.Errorf("ParseSchedule(%q) = %q; want %q", tc.input, output, tc.expected)
+				t.Errorf("ParseMessage(%q) = %q; want %q", tc.input, output, tc.expected)
 			}
 		})
 	}
