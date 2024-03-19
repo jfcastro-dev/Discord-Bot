@@ -21,15 +21,26 @@ func ParseMessage(content string) string {
 	return GetHelpMessage()
 }
 
-// ParseScheduler takes content that matches the Schedule format and returns a message on match.
+// ParseSchedule takes content that matches the Schedule format and returns a message on match.
 func ParseSchedule(content string) string {
-	layout := "1/1 2:00PM"
-	_, err := time.Parse(layout, content)
+	schedule_arr := strings.Fields(content)
+	layout := "1/2 3:04PM"
+	t, err := time.Parse(layout, strings.Join(schedule_arr[1:], " "))
+	year := time.Now().Year()
+
+	t = time.Date(year, t.Month(), t.Day(), t.Hour(), t.Minute(), 0, 0, t.Location())
+
 	if err != nil {
 		fmt.Println(err)
 		return GetHelpMessage()
 	}
-	return "React to this message if you'd like to partake in this session."
+	return printSchedule(schedule_arr[0], t)
+}
+
+func printSchedule(activity string, time time.Time) string {
+	s := time.Format("Monday 1/2 3:04 PM")
+	message := fmt.Sprintf("React to this message if you'd like to partake in %s on %s.", activity, s)
+	return message
 }
 
 // GetHelpMessage returns a string with the help message as a catch all.

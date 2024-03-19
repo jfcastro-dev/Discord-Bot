@@ -14,8 +14,8 @@ func TestParseSchedule(t *testing.T) {
 	}{
 		{
 			name:     "Accepted Test Case",
-			input:    "3/10 7:00PM",
-			expected: "React to this message if you'd like to partake in this session.",
+			input:    "Jackbox 3/19 7:00PM",
+			expected: "React to this message if you'd like to partake in Jackbox on Tuesday 3/19 7:00 PM.",
 		},
 		{
 			name:     "Rejected Test Case",
@@ -49,8 +49,8 @@ func TestParseCommand(t *testing.T) {
 	}{
 		{
 			name:     "Parse Date Command",
-			input:    fmt.Sprintf("%s %s 3/10 7:00PM", constants.BOT_PREFIX, constants.SCHEDULE),
-			expected: "React to this message if you'd like to partake in this session.",
+			input:    fmt.Sprintf("%s %s Jackbox 03/19 7:00PM", constants.BOT_PREFIX, constants.SCHEDULE),
+			expected: "React to this message if you'd like to partake in Jackbox on Tuesday 3/19 7:00 PM.",
 		},
 		{
 			name:     "Get Help",
