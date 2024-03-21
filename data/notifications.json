@@ -1,0 +1,13 @@
+{
+    "notifications": [
+        {
+            "users": [
+                "user1",
+                "user2"
+            ],
+            "event": "Jackbox",
+            "timestamp": "2019-01-01T00:00:00Z",
+            "channel_id": "1234567890"
+        }
+    ]
+}

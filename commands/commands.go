@@ -2,10 +2,19 @@ package commands
 
 import (
 	"fmt"
+	"github.com/bwmarrin/discordgo"
 	"github.com/jfcastro-dev/discord-bot/constants"
 	"strings"
 	"time"
 )
+
+func MessageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if strings.HasPrefix(strings.ToLower(strings.TrimSpace(m.Content)), constants.BOT_PREFIX) {
+		message := ParseMessage(m.Content)
+		fmt.Println(message)
+		s.ChannelMessageSend(m.ChannelID, message)
+	}
+}
 
 // ParseMessage takes in the content and sends it to the appropriate handler.
 func ParseMessage(content string) string {

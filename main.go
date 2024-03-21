@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"github.com/bwmarrin/discordgo"
 	"github.com/jfcastro-dev/discord-bot/commands"
-	"github.com/jfcastro-dev/discord-bot/constants"
 	"log"
 	"os"
 	"os/signal"
-	"strings"
 )
 
 func main() {
@@ -20,13 +18,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	session.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
-		if strings.HasPrefix(strings.ToLower(strings.TrimSpace(m.Content)), constants.BOT_PREFIX) {
-			message := commands.ParseMessage(m.Content)
-			log.Println(message)
-			s.ChannelMessageSend(m.ChannelID, message)
-		}
-	})
+	session.AddHandler(commands.MessageHandler)
 	err = session.Open()
 	if err != nil {
 		panic(err)
